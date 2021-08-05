@@ -1,4 +1,4 @@
-package com.dscatalog.backend;
+package com.dscatalog;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
