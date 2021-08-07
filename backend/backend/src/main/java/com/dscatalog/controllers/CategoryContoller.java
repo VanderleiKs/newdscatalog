@@ -2,6 +2,7 @@ package com.dscatalog.controllers;
 
 import java.util.List;
 
+import com.dscatalog.dtos.CategoryDto;
 import com.dscatalog.entities.Category;
 import com.dscatalog.services.CategoryService;
 
@@ -21,7 +22,7 @@ public class CategoryContoller {
     private CategoryService categoryService;
 
     @GetMapping
-    public ResponseEntity<List<Category>> findAll(){
+    public ResponseEntity<List<CategoryDto>> findAll(){
         return ResponseEntity.ok().body(categoryService.findAll());
     } 
 
