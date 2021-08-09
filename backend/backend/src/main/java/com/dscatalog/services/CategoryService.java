@@ -1,5 +1,6 @@
 package com.dscatalog.services;
 
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -11,6 +12,7 @@ import com.dscatalog.repositories.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @Service
 public class CategoryService {
@@ -26,8 +28,8 @@ public class CategoryService {
     }
 
     @Transactional
-    public Category add(Category category) {
-        return categoryRepository.save(category);
+    public CategoryDto add(CategoryDto category) {
+        return new CategoryDto(categoryRepository.save(new Category(category)));
     }
 
     @Transactional(readOnly = true)

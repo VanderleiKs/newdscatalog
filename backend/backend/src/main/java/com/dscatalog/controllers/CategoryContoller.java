@@ -1,5 +1,6 @@
 package com.dscatalog.controllers;
 
+import java.net.URI;
 import java.util.List;
 
 import com.dscatalog.dtos.CategoryDto;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
 @RequestMapping("/categories")
@@ -33,7 +35,9 @@ public class CategoryContoller {
     }
 
     @PostMapping
-    public ResponseEntity<Category> addCategory(@RequestBody Category category){
-        return ResponseEntity.ok().body(categoryService.add(category));
+    public ResponseEntity<CategoryDto> addCategory(@RequestBody CategoryDto category){
+        CategoryDto dto = categoryService.add(category);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").buildAndExpand(dto.getId()).toUri();
+        return ResponseEntity.created(uri).body(dto);
     }
 }

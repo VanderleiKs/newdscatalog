@@ -1,5 +1,7 @@
 package com.dscatalog.entities;
 
+import com.dscatalog.dtos.CategoryDto;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,6 +20,10 @@ public class Category{
 
      public Category(String name){
          this.name = name;
+     }
+
+     public Category(CategoryDto dto){
+         this.name = dto.getName();
      }
 
      public long getId(){
