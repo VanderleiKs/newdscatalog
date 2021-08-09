@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import com.dscatalog.dtos.CategoryDto;
 import com.dscatalog.entities.Category;
+import com.dscatalog.exceptions.NotFoundException;
 import com.dscatalog.repositories.CategoryRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,6 @@ public class CategoryService {
 
     @Transactional(readOnly = true)
     public CategoryDto findById(long id) {
-        return new CategoryDto(categoryRepository.findById(id).get());
+        return new CategoryDto(categoryRepository.findById(id).orElseThrow(() -> new NotFoundException("Not found")));
     }
 }
