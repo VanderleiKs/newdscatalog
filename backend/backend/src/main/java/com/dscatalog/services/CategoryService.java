@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.persistence.EntityNotFoundException;
+
 @Service
 public class CategoryService {
 
@@ -36,5 +38,17 @@ public class CategoryService {
     public CategoryDto findById(long id) {
         return new CategoryDto(categoryRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Category "+id+" Not found")));
+    }
+
+    @Transactional
+    public CategoryDto update(Long id, CategoryDto dto) {
+        try {
+            Category entity = categoryRepository.getOne(id);
+            entity.setName(dto.getName());
+            return new CategoryDto(categoryRepository.save(entity));
+        }
+        catch (EntityNotFoundException ex){
+            throw new NotFoundException("Id "+id+" not found");
+        }
     }
 }
