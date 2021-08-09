@@ -32,6 +32,7 @@ public class CategoryService {
 
     @Transactional(readOnly = true)
     public CategoryDto findById(long id) {
-        return new CategoryDto(categoryRepository.findById(id).orElseThrow(() -> new NotFoundException("Not found")));
+        return new CategoryDto(categoryRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Category "+id+" Not found")));
     }
 }
