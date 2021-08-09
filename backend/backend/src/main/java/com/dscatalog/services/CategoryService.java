@@ -28,4 +28,9 @@ public class CategoryService {
     public Category add(Category category) {
         return categoryRepository.save(category);
     }
+
+    @Transactional(readOnly = true)
+    public CategoryDto findById(long id) {
+        return new CategoryDto(categoryRepository.findById(id).get());
+    }
 }
