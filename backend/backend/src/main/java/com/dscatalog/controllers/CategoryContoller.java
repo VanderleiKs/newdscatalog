@@ -4,7 +4,6 @@ import java.net.URI;
 import java.util.List;
 
 import com.dscatalog.dtos.CategoryDto;
-import com.dscatalog.entities.Category;
 import com.dscatalog.services.CategoryService;
 
 import org.springframework.beans.factory.annotation.Autowired;
